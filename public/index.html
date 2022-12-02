@@ -9,6 +9,7 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -34,6 +35,7 @@
       color:white;
 
     }
+   
     </style>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -46,25 +48,62 @@
     -->
     <title>EBC contact App</title>
   </head>
-  <body style=" display:flex; flex-direction:column;">
-    <div  class="logo Card bg-primary position-fixed" style="display:flex; flex-direction:row; justify-content:space-between; align-items:center;">
+  <body style=" display:flex; flex-direction:column; align-items:center;">
+    <!-- start test nav -->
+ 
+    
+
+    <nav style=" width: 90% !important; height:100px; margin-top:20px;" class="navbar navbar-expand-xl navbar-dark bg-primary rounded position-fixed" aria-label="Sixth navbar example">
+      <div style="margin-top: 20px;" class="container-fluid bg-primary rounded">
+        <div style="display:flex; flex-direction:column; height:100px; width: 180px; margin-top:5px;">
+
+          <img src="ebc-logo.png" alt="ebc logo" class="image mb-0" style="height: 80px; width: 180px; margin-bottom : 0px; padding-bottom: 0px;">
+        
+          <h6 class="title p-0" >Assignment Department</h6>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExample06">
+          <ul style="margin-left: 180px;  " class="navbar-nav me-auto mb-2 mb-xl-0">
+            <li class="nav-item">
+              <div id="addContact"></div>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-labeled btn-success">
+                <span  style="height:100%; width:20%;padding: 8px 13px; margin-left:-12px ;
+                background: rgba(0, 0, 0, 0.15);"><i class="fa fa-check"></i></span>Catagories</button>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown06">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="shadow-lg pt-2 bg-light rounded" style="display:flex; flex-direction:column; align-items:center; justify-content:space-around; height:120px;">
+            <div id="search" style="width:300px;"> </div>
+            <!-- <div class="card mt-4 d-flex align-items-center shadow-sm"> -->
+                <!-- <h4 class="text-primary">add contacts</h4> -->
+            <!-- </div> -->
+    
+          </div>
+        </div>
+      </div>
+    </nav>
+      <!-- end test nav -->
+    <!-- <div  class="logo Card bg-primary position-fixed" style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; top: 200px">
       <div style="margin-left:300px;">
       </div>
-      <div >
-
-        <img src="EBC_2000s_logo.webp" alt="ebc logo" class="image">
       
-        <h2 class="title" style="margin-left:17px;">Contact Admin</h2>
-      </div>
-      <div class="shadow-lg p-3 bg-white rounded" style="display:flex; flex-direction:column; align-items:center; justify-content:space-around; ">
-        <div id="search" style="width:400px;"> </div>
-        <div class="card mt-4 d-flex align-items-center shadow-sm w-100">
-            <h4 class="text-primary">add contacts</h4>
-          <div id="addContact"></div>
-        </div>
-
-      </div>
-    </div>
+      
+    </div> -->
     <div id="loading"></div>
     <div id="contactDetail"></div>
     <div id="contactAddForm"></div>

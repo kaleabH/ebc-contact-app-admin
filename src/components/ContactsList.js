@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Contact from "./Contact";
-import { getContacts } from "../util/contactsApi";
+import {
+  getContacts,
+  getExternalcontacts,
+  getInternalContacts,
+} from "../util/contactsApi2";
 import ContactDetails from "./ContactDetails";
 import SearchBox from "./SearchBox";
 

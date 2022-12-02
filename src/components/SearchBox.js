@@ -7,7 +7,7 @@ function SearchBox({ masterDataSource, setFilteredDataSource }) {
   const handleTextInput = (e) => {
     let text = e.target.value;
     if (text) {
-      const newData = masterDataSource.filter(function (item) {
+      const newData = masterDataSource.filter(function(item) {
         const itemData = item.firstName
           ? item.firstName.toUpperCase()
           : "".toUpperCase();
@@ -39,6 +39,23 @@ function SearchBox({ masterDataSource, setFilteredDataSource }) {
         onChange={handleTextInput}
         autoFocus
       />
+      <div>
+        <div
+          class="btn-group w-100 mt-2"
+          role="group"
+          aria-label="Basic example"
+        >
+          <button type="button" class="btn btn-success">
+            All
+          </button>
+          <button type="button" class="btn btn-success">
+            Internal
+          </button>
+          <button type="button" class="btn btn-success">
+            External
+          </button>
+        </div>
+      </div>
     </div>,
     document.getElementById("search")
   );
