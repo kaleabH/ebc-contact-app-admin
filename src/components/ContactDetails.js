@@ -10,8 +10,7 @@ const reducer = (contact, action) => {
   return { ...contact, [action.name]: action.value };
 };
 function ContactDetails(props) {
-  const [loading, setLoading] = useState(false);
-  const { contact, onRefresh, loaded, setLoaded } = props;
+  const { contact, onRefresh, loaded, setLoaded, loading, setLoading } = props;
   const [edit, setEdit] = useState(false);
   const [newContact, dispatch] = useReducer(reducer, contact);
 

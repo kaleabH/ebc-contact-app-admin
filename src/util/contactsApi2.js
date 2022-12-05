@@ -1,20 +1,19 @@
 const axios = require("axios");
 const api = axios.create({
-  baseURL:
-    "https://api.jsonstorage.net/v1/json/b8b28667-4983-42a1-b60b-4aad38f39f99/07ddc6f8-5d5b-4e0b-91d0-9056035ed2f3",
+  baseURL: "https://api.jsonbin.io/v3/b/6389d05b003d6444ce60c326",
 });
-const key = "0fd11bd1-3ecd-42c3-a3f9-a0a2b73f2b11";
+const key = "$2b$10$oyACctGkJDCjwuEKOcpRPO4dwjCqEFoYOznrF5ngbtxVzGLyyur2S";
 const config = {
-  params: { apikey: key },
+  // params: { apikey: key },
 
-  header: { authorization: key },
+  headers: { "X-Master-Key": key },
 };
 export const getCategories = async (division) => {
   // if nothing is passed to this method it will return all the categories
   try {
-    const request = await api.get("/");
+    const request = await api.get("/", config);
 
-    const data = await request.data;
+    const data = await request.data.record;
     const internal = data.internal;
     const external = data.external;
     const categories = [];
@@ -37,6 +36,7 @@ export const getCategories = async (division) => {
         categories.push(prop.toString());
       }
     }
+    console.log("fetched categories", categories);
     return categories;
   } catch (err) {
     console.log(err);
@@ -44,9 +44,9 @@ export const getCategories = async (division) => {
 };
 export const getContacts = async () => {
   try {
-    const request = await api.get("/");
+    const request = await api.get("/", config);
 
-    const data = await request.data;
+    const data = await request.data.record;
     const internal = data.internal;
     const external = data.external;
     const contacts = [];
@@ -57,24 +57,46 @@ export const getContacts = async () => {
       contacts.push(...external[prop]);
     }
 
-    console.log("the fetched data is", contacts);
+    console.log("the all fetched data is", contacts);
     return contacts;
   } catch (err) {
     console.log(err);
   }
 };
+export const getContactsByCategory = async (category) => {
+  // let division = "";
+  console.log("the category inside the getContactsByCategory", category);
+  try {
+    const request = await api.get("/", config);
+    console.log("the api response", request.data);
+    const data = await request.data.record;
+
+    let contacts = [];
+
+    for (const prop in data) {
+      if (data[prop].hasOwnProperty(category)) {
+        contacts = [...data[prop][category]];
+      }
+    }
+
+    console.log("the contact fetched by category", contacts);
+    return contacts;
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 export const getInternalContacts = async () => {
   try {
-    const request = await api.get("/");
+    const request = await api.get("/", config);
 
-    const data = await request.data;
+    const data = await request.data.record;
     const internal = data.internal;
     const contacts = [];
     for (const prop in internal) {
       contacts.push(...internal[prop]);
     }
-    console.log("the fetched data is", contacts);
+    console.log("the internal fetched data is", contacts);
     return contacts;
   } catch (err) {
     console.log(err);
@@ -83,9 +105,9 @@ export const getInternalContacts = async () => {
 
 export const getExternalContacts = async () => {
   try {
-    const request = await api.get("/");
+    const request = await api.get("/", config);
 
-    const data = await request.data;
+    const data = await request.data.record;
     const external = data.external;
     const contacts = [];
 
@@ -93,7 +115,7 @@ export const getExternalContacts = async () => {
       contacts.push(...external[prop]);
     }
 
-    console.log("the fetched data is", contacts);
+    console.log("the external fetched data is", contacts);
     return contacts;
   } catch (err) {
     console.log(err);
@@ -120,9 +142,9 @@ export const updateContacts = async (contact) => {
 export const deleteContact = async (id) => {
   try {
     console.log("deleteContact");
-    const request = await api.get("/");
+    const request = await api.get("/", config);
 
-    const data = await request.data;
+    const data = await request.data.record;
 
     const contacts = await getContacts();
     let division = "";
@@ -154,9 +176,9 @@ export const deleteContact = async (id) => {
 export const addContact = async (contact) => {
   try {
     console.log("the contact to be added function", contact);
-    const request = await api.get("/");
+    const request = await api.get("/", config);
 
-    const data = await request.data;
+    const data = await request.data.record;
     // const contacts = await getContacts();
 
     const division = contact.division;
@@ -185,15 +207,15 @@ export const addContact = async (contact) => {
 export const addCategory = async (category, division) => {
   try {
     console.log("add category");
-    const request = await api.get("/");
+    const request = await api.get("/", config);
 
-    const data = await request.data;
+    const data = await request.data.record;
     // const contacts = await getContacts();
 
     //  const newContacts = {...data};
     const newCategory = { [category]: [] };
-    const newDivision = { ...data[division], newCategory };
-    const newContacts = { ...data, newDivision };
+    const newDivision = { ...data[division], ...newCategory };
+    const newContacts = { ...data, [division]: newDivision };
     //the above line of code can be replace with
     //const newContacts = { ...data,[division]:{...data[division], [category]:{...data[division][category], contact}} }
 
@@ -202,10 +224,12 @@ export const addCategory = async (category, division) => {
     //push and assign in different line the push method returns the array length
     // contacts.push(contact);
     // const newContacts = contacts;
-    console.log(
+    console.warn(
       "the new contacts list after new category addition",
       newContacts
     );
+    console.warn("the new division ", newDivision);
+    console.warn("the category", newCategory);
     await api.put("/", newContacts, config);
     return true;
   } catch (err) {

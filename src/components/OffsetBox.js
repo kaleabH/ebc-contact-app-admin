@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function OffsetBox() {
-  return (
-    <div style={{height:"220px", width:"100%"}}></div>
-  )
+  return <div style={{ height: "100px", width: "100%" }}></div>;
 }
 
-export default OffsetBox
+export default OffsetBox;
