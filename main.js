@@ -18,8 +18,12 @@ function createWindow() {
   // and load the index.html of the app.
   //   mainWindow.loadFile('index.html')
   // console.log(`path is file://${path.join(__dirname, "./dist/index.html")}`);
-  mainWindow.loadFile("./../../dist/index.html");
-  // mainWindow.loadURL("http://localhost:3000");
+
+  /* for build into a desktop application with electron */
+  // mainWindow.loadFile("./../../dist/index.html");
+
+  /* to run app in local serve and electron for development */
+  mainWindow.loadURL("http://localhost:3000");
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
