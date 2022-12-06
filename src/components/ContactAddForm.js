@@ -2,7 +2,7 @@ import React, { useState, useReducer, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Button from "./Button";
 import Form from "./Form";
-import { addContact } from "../util/contactsApi";
+import { addContact } from "../util/contactsApi2";
 import Loading from "./Loading";
 import useConfirmState from "../hooks/useConfirmState";
 import FormConfirm from "./FormConfirm";
@@ -15,6 +15,8 @@ const initialContact = {
   lastName: "",
   email: "",
   phone: "",
+  category: "",
+  division: "internal",
   image: null,
 };
 

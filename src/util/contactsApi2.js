@@ -162,15 +162,15 @@ export const deleteContact = async (id) => {
         ...data[division][category].filter((contact) => contact.id !== id),
       ],
     };
-    const newDivision = { ...data[division], newCategory };
-    const newContacts = { ...data, newDivision };
+    const newDivision = { ...data[division], ...newCategory };
+    const newContacts = { ...data, [division]: newDivision };
 
     // const newContacts = [...contacts.filter((contact) => contact.id !== id)];
     console.log("contacts after deletion", newContacts);
     await api.put("/", newContacts, config);
     return true;
   } catch (err) {
-    return err;
+    return console.error(err);
   }
 };
 export const addContact = async (contact) => {
@@ -186,8 +186,8 @@ export const addContact = async (contact) => {
 
     //  const newContacts = {...data};
     const newCategory = { [category]: [...data[division][category], contact] };
-    const newDivision = { ...data[division], newCategory };
-    const newContacts = { ...data, newDivision };
+    const newDivision = { ...data[division], ...newCategory };
+    const newContacts = { ...data, [division]: newDivision };
     //the above line of code can be replace with
     //const newContacts = { ...data,[division]:{...data[division], [category]:{...data[division][category], contact}} }
 

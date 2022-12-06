@@ -1,5 +1,4 @@
 import "./App.css";
-import AddContacts from "./components/AddContacts";
 import ContactList from "./components/ContactsList";
 import OffsetBox from "./components/OffsetBox";
 import CheckInternet from "./components/CheckInternet";
@@ -33,7 +32,7 @@ function App() {
   ) : online === "online" ? (
     <>
       <OffsetBox />
-      <AddContacts onRefresh={setRefreshList} />
+
       <AddCategory onRefresh={setRefreshList} />
       <ContactList refresh={refreshList} onRefresh={setRefreshList} />
     </>

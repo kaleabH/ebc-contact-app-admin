@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 
 function CategoryList({
+  selectedCategory,
   categories,
   handleSettingCategory,
   loaded,
@@ -10,11 +10,16 @@ function CategoryList({
   division,
 }) {
   const [showList, setShowList] = useState(false);
+  const [selectedCat, setSelectedCat] = useState("");
 
-  return ReactDOM.createPortal(
+  useEffect(() => {
+    if (selectedCategory !== "") setSelectedCat(selectedCategory);
+  }, [selectedCategory]);
+
+  return (
     <div className="bg-light rounded">
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <h4 style={{ marginRight: "10px" }}>Category </h4>
+        <h4 style={{ marginRight: "10px" }}> {selectedCat || "Category"} </h4>
         <button
           className="btn btn-info dropdown-toggle mb-2"
           aria-haspopup="true"
@@ -59,8 +64,7 @@ function CategoryList({
           </div>
         )
       )}
-    </div>,
-    document.getElementById("category")
+    </div>
   );
 }
 

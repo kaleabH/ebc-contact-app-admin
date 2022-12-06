@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Contact from "./Contact";
-import CategoryList from "./CategoryList";
 import {
   getContacts,
   getExternalContacts,
@@ -11,6 +10,8 @@ import {
 import ContactDetails from "./ContactDetails";
 import SearchBox from "./SearchBox";
 import Loading from "./Loading";
+import AddContacts from "./AddContacts";
+import CategoryPortal from "./CategoryPortal";
 
 function ContactsList({ refresh, onRefresh }) {
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,8 @@ function ContactsList({ refresh, onRefresh }) {
   const [clickedContact, setClickedContact] = useState({});
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
+
+  const [openDetail, setOpenDetail] = useState(true);
 
   const handleSettingCategory = (cat) => {
     setLoading(true);
@@ -102,7 +105,9 @@ function ContactsList({ refresh, onRefresh }) {
   console.log("loading value", loading);
   return (
     <>
-      <CategoryList
+      <AddContacts onRefresh={onRefresh} />
+      <CategoryPortal
+        selectedCategory={selectedCategory}
         categories={categories}
         loaded={loaded}
         loading={loading}
@@ -113,7 +118,10 @@ function ContactsList({ refresh, onRefresh }) {
         <Loading />
       ) : (
         loaded && (
-          <div style={{ maxWidth: "960px" }} className="container mt-4">
+          <div
+            style={{ maxWidth: "960px", paddingRight: "0px" }}
+            className="container mt-4"
+          >
             <div className="row">
               {filteredDataSource.map((contact) => (
                 <Contact
@@ -126,9 +134,10 @@ function ContactsList({ refresh, onRefresh }) {
                 />
               ))}
             </div>
-            {clickedContact.hasOwnProperty("id") && (
+            {openDetail && clickedContact.hasOwnProperty("id") && (
               <ContactDetails
                 onRefresh={onRefresh}
+                setOpenDetail={setOpenDetail}
                 loaded={loaded}
                 loading={loading}
                 setLoading={(value) => {

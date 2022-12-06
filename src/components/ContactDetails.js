@@ -2,7 +2,7 @@ import React, { useState, useReducer, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Button from "./Button";
 import Form from "./Form";
-import { deleteContact, updateContacts } from "../util/contactsApi";
+import { deleteContact, updateContacts } from "../util/contactsApi2";
 import Loading from "./Loading";
 import FormConfirm from "./FormConfirm";
 import useConfirmState from "../hooks/useConfirmState";
@@ -10,7 +10,15 @@ const reducer = (contact, action) => {
   return { ...contact, [action.name]: action.value };
 };
 function ContactDetails(props) {
-  const { contact, onRefresh, loaded, setLoaded, loading, setLoading } = props;
+  const {
+    contact,
+    onRefresh,
+    loaded,
+    setLoaded,
+    loading,
+    setLoading,
+    setOpenDetail,
+  } = props;
   const [edit, setEdit] = useState(false);
   const [newContact, dispatch] = useReducer(reducer, contact);
 
@@ -34,6 +42,7 @@ function ContactDetails(props) {
     // e.preventDefault();
     setLoading(true);
     setVisiblity(false);
+    setOpenDetail(false);
     let apiMutated = await deleteContact(contact.id);
     onRefresh(apiMutated);
     setLoading(false);
@@ -55,6 +64,7 @@ function ContactDetails(props) {
     // e.preventDefault();
     setLoading(true);
     setVisiblity(false);
+    setOpenDetail(false);
     let apiMutated = await updateContacts(newContact);
     onRefresh(apiMutated);
     setLoading(false);
