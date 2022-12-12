@@ -7,7 +7,6 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
     icon: "icon.ico",
-    resizable: false,
     width: 1400,
     height: 1200,
     webPreferences: {
