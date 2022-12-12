@@ -5,6 +5,7 @@ import CheckInternet from "./components/CheckInternet";
 import React, { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import AddCategory from "./components/AddCategory";
+// import CryptoGraph from "./components/CryptoGraph";
 function App() {
   const [refreshList, setRefreshList] = useState(true);
   const [online, setOnline] = useState("loading");
@@ -32,7 +33,7 @@ function App() {
   ) : online === "online" ? (
     <>
       <OffsetBox />
-
+      {/* <CryptoGraph /> */}
       <AddCategory onRefresh={setRefreshList} />
       <ContactList refresh={refreshList} onRefresh={setRefreshList} />
     </>

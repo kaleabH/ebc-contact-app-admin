@@ -185,7 +185,9 @@ export const addContact = async (contact) => {
     const category = contact.category;
 
     //  const newContacts = {...data};
-    const newCategory = { [category]: [...data[division][category], contact] };
+    const newCategory = {
+      [category]: [...data[division][category], { ...contact }],
+    };
     const newDivision = { ...data[division], ...newCategory };
     const newContacts = { ...data, [division]: newDivision };
     //the above line of code can be replace with

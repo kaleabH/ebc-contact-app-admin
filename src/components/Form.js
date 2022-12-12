@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -14,11 +14,11 @@ import { getCategories } from "./../util/contactsApi2";
 const theme = createTheme();
 
 function Form(props) {
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const emailRef = useRef(null);
-  const phoneRef = useRef(null);
-  const closeRef = useRef(null);
+  // const firstNameRef = useRef(null);
+  // const lastNameRef = useRef(null);
+  // const emailRef = useRef(null);
+  // const phoneRef = useRef(null);
+  // const closeRef = useRef(null);
   const { onClose, onChange, disabled, required, edit, formConfirm } = props;
   const {
     firstName,
@@ -75,12 +75,12 @@ function Form(props) {
                 float: "right",
                 marignBottom: "200px",
               }}
+              onClick={onClose}
             >
               <Icon
                 className="fa-times-circle "
                 baseClassName="fas"
-                ref={closeRef}
-                onClick={onClose}
+                // ref={closeRef}
                 sx={{
                   fontSize: 30,
                 }}
@@ -110,7 +110,7 @@ function Form(props) {
                     />
                   </Avatar>
                   <Typography component="h1" variant="h5">
-                    <h2> {`${firstName} ${lastName}`}</h2>
+                    {`${firstName} ${lastName}`}
                   </Typography>
                   <Box component="form" noValidate sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
@@ -180,8 +180,8 @@ function Form(props) {
                             <TextField
                               autoComplete="given-name"
                               name="firstName"
-                              ref={firstNameRef}
-                              disabled={disabled}
+                              // ref={firstNameRef}
+                              readOnly={disabled}
                               required={required}
                               onChange={onChange}
                               value={firstName}
@@ -198,8 +198,8 @@ function Form(props) {
                           <Grid item xs={12} sm={6}>
                             <TextField
                               fullWidth
-                              ref={lastNameRef}
-                              disabled={disabled}
+                              // ref={lastNameRef}
+                              readOnly={disabled}
                               required={required}
                               onChange={onChange}
                               value={lastName}
@@ -209,7 +209,7 @@ function Form(props) {
                               }}
                               id="lastName"
                               label={"lastName"}
-                              defaultvalue={lastName}
+                              // defaultValue={lastName}
                               name="lastName"
                               autoComplete="family-name"
                             />
@@ -220,12 +220,12 @@ function Form(props) {
                       <Grid item xs={12}>
                         <TextField
                           required={required}
-                          disabled={disabled}
+                          readOnly={disabled}
                           onChange={onChange}
                           value={email}
                           style={{ color: "000" }}
                           fullWidth
-                          ref={emailRef}
+                          // ref={emailRef}
                           InputLabelProps={{
                             style: { color: "#000" },
                           }}
@@ -237,12 +237,12 @@ function Form(props) {
                       </Grid>
                       <Grid item xs={12}>
                         <TextField
-                          disabled={disabled}
+                          readOnly={disabled}
                           required={required}
                           style={{ color: "000" }}
                           value={phone}
                           fullWidth
-                          ref={phoneRef}
+                          // ref={phoneRef}
                           onChange={onChange}
                           name="phone"
                           InputLabelProps={{

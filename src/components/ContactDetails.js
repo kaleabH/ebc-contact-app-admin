@@ -12,6 +12,7 @@ const reducer = (contact, action) => {
 function ContactDetails(props) {
   const {
     contact,
+    setClickedContact,
     onRefresh,
     loaded,
     setLoaded,
@@ -46,6 +47,7 @@ function ContactDetails(props) {
     let apiMutated = await deleteContact(contact.id);
     onRefresh(apiMutated);
     setLoading(false);
+    setClickedContact({});
   };
   const handleChange = (e) => {
     dispatch(e.target);
@@ -68,6 +70,7 @@ function ContactDetails(props) {
     let apiMutated = await updateContacts(newContact);
     onRefresh(apiMutated);
     setLoading(false);
+    setClickedContact({});
   };
 
   return ReactDOM.createPortal(

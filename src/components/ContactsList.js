@@ -151,6 +151,9 @@ function ContactsList({ refresh, onRefresh }) {
                   setLoaded(true);
                 }}
                 contact={clickedContact}
+                setClickedContact={(val) => {
+                  setClickedContact(val);
+                }}
               />
             )}
             <SearchBox
