@@ -1,12 +1,11 @@
 {
   "name": "ebc-contact-app-admin",
   "version": "0.1.0",
-  "author":"kaleab hailu",
-  "description":"admin for contact application",
+  "author": "kaleab hailu",
+  "description": "admin for contact application",
   "homepage": ".",
   "private": true,
-  "devDependencies":{
-
+  "devDependencies": {
     "electron": "^6.1.12",
     "electron-builder": "^23.6.0"
   },
@@ -21,6 +20,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "concurrently": "^7.5.0",
+    "crypto-js": "^4.1.1",
     "fg-loadcss": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -35,9 +35,9 @@
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron-react":" electron .",
+    "electron-react": " electron .",
     "make": "electron-forge make",
-    "build-installer":"electron-builder"
+    "build-installer": "electron-builder"
   },
   "build": {
     "extends": null,

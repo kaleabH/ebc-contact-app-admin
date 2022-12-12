@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { loadCSS } from "fg-loadcss";
-import Icon from "@mui/material/Icon";
-import IconButton from "@mui/material/IconButton";
 import ContactAddForm from "./ContactAddForm";
 
 function AddContacts(props) {
@@ -23,19 +21,27 @@ function AddContacts(props) {
 
   return ReactDOM.createPortal(
     <div>
-      <IconButton
+      <button
         onClick={() => {
           setAddForm(true);
           setLoaded(true);
         }}
-        sx={{ margin: 0, padding: 0, marginTop: 1 }}
+        type="button"
+        className="btn btn-labeled btn-danger"
       >
-        <Icon
-          baseClassName="fas"
-          className="fa-plus-circle "
-          sx={{ color: "#f01d51", fontSize: 60 }}
-        />
-      </IconButton>
+        <span
+          style={{
+            height: "100%",
+            width: "20%",
+            padding: "8px 13px",
+            marginLeft: "-12px",
+            background: "#f02b70",
+          }}
+        >
+          <i className="fa fa-plus-circle"></i>
+        </span>
+        Add Contact
+      </button>
       {addForm && (
         <ContactAddForm
           onRefresh={onRefresh}

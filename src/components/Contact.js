@@ -7,6 +7,7 @@ function Contact(props) {
 
   return (
     <div
+      style={{ minWidth: "210px" }}
       className="col-3 pt-4"
       onClick={() => {
         setLoaded(true);

@@ -13,7 +13,8 @@
 
 # distribution
 /dist
-
+# api json structure test
+example.json
 # misc
 .DS_Store
 .env.local

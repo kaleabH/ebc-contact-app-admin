@@ -1,8 +1,8 @@
-import React, { useState, useReducer, useRef, useEffect } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Button from "./Button";
 import Form from "./Form";
-import { addContact } from "../util/contactsApi";
+import { addContact } from "../util/contactsApi2";
 import Loading from "./Loading";
 import useConfirmState from "../hooks/useConfirmState";
 import FormConfirm from "./FormConfirm";
@@ -15,6 +15,8 @@ const initialContact = {
   lastName: "",
   email: "",
   phone: "",
+  category: "",
+  division: "internal",
   image: null,
 };
 
@@ -23,7 +25,7 @@ const reducer = (contact, action) => {
 };
 
 function ContactAddForm({ onClose, onRefresh, loaded, setLoaded }) {
-  const closeRef = useRef(null);
+  // const closeRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [contact, dispatch] = useReducer(reducer, initialContact);
   const [visible, setVisiblity] = useConfirmState();
@@ -60,7 +62,7 @@ function ContactAddForm({ onClose, onRefresh, loaded, setLoaded }) {
           <Form
             contact={contact}
             onClose={onClose}
-            ref={closeRef}
+            // ref={closeRef}
             edit={true}
             onChange={handleChange}
             formConfirm={
