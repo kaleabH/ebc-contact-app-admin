@@ -53,6 +53,7 @@ function AddContacts(props) {
             setAddForm(false);
             setLoaded(true);
           }}
+          setAddForm={setAddForm}
         />
       )}
     </div>,

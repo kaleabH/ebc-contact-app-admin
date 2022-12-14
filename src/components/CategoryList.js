@@ -18,10 +18,17 @@ function CategoryList({
 
   return (
     <div className="bg-light rounded">
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <h4 style={{ marginRight: "10px" }}> {selectedCat || "Category"} </h4>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          height: 38,
+        }}
+      >
+        <h5 style={{ marginRight: "10px" }}> {selectedCat || "Category"} </h5>
         <button
-          className="btn btn-info dropdown-toggle mb-2"
+          className="btn btn-info dropdown-toggle"
           aria-haspopup="true"
           aria-expanded="false"
           onClick={() => {
