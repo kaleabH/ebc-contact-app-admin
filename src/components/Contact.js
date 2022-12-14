@@ -1,9 +1,26 @@
 import { Icon } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Contact(props) {
   const { onContactClick, setLoaded } = props;
   const { firstName, lastName, phone } = props.contact;
+  const [userColor, setUserColor] = useState("");
+
+  function random_rgba() {
+    var o = Math.round,
+      r = Math.random,
+      s = 255;
+    return "rgba(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ",1)";
+  }
+
+  useEffect(() => {
+    const color = random_rgba();
+    setUserColor(
+      color !== "rgba(0,0,0,1)" && "rgba(255,255,255,1)"
+        ? color
+        : "rgba(139,160,29,1)"
+    );
+  }, []);
 
   return (
     <div
@@ -21,7 +38,7 @@ function Contact(props) {
               baseClassName="fas"
               className="fa-user-circle "
               sx={{
-                color: "purple",
+                color: userColor,
                 textAlign: "center",
                 fontSize: 50,
               }}

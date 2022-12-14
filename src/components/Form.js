@@ -27,11 +27,28 @@ function Form(props) {
     phone,
     division,
     category,
+    position,
+    location,
   } = props.contact;
 
   const [categories, setCategories] = useState([]);
   const [disableCategory, setDisableCategory] = useState(false);
+  const [userColor, setUserColor] = useState("");
+
+  function random_rgba() {
+    var o = Math.round,
+      r = Math.random,
+      s = 255;
+    return "rgba(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ",1)";
+  }
+
   useEffect(() => {
+    const color = random_rgba();
+    setUserColor(
+      color !== "rgba(0,0,0,1)" && "rgba(255,255,255,1)"
+        ? color
+        : "rgba(139,160,29,1)"
+    );
     window.scrollTo(0, 0);
     setDisableCategory(true);
     getCategories(division).then((cats) => {
@@ -78,7 +95,7 @@ function Form(props) {
               onClick={onClose}
             >
               <Icon
-                className="fa-times-circle "
+                className="fa-times-circle"
                 baseClassName="fas"
                 // ref={closeRef}
                 sx={{
@@ -98,14 +115,20 @@ function Form(props) {
                     alignItems: "center",
                   }}
                 >
-                  <Avatar>
+                  <Avatar
+                    sx={{
+                      color: userColor,
+                      height: 90,
+                      width: 90,
+                    }}
+                  >
                     <Icon
                       baseClassName="fas"
                       className="fa-user-circle "
                       onClick={onClose}
                       sx={{
-                        color: "purple",
-                        fontSize: 50,
+                        color: userColor,
+                        fontSize: 90,
                       }}
                     />
                   </Avatar>
@@ -176,6 +199,7 @@ function Form(props) {
                               </div>
                             </div>
                           </div>
+
                           <Grid item xs={12} sm={6}>
                             <TextField
                               autoComplete="given-name"
@@ -197,26 +221,44 @@ function Form(props) {
                           </Grid>
                           <Grid item xs={12} sm={6}>
                             <TextField
-                              fullWidth
-                              // ref={lastNameRef}
+                              autoComplete="given-name"
+                              name="lastName"
+                              // ref={firstNameRef}
                               readOnly={disabled}
                               required={required}
                               onChange={onChange}
                               value={lastName}
-                              style={{ color: "fff" }}
+                              style={{ color: "000" }}
+                              fullWidth
                               InputLabelProps={{
                                 style: { color: "#000" },
                               }}
                               id="lastName"
                               label={"lastName"}
-                              // defaultValue={lastName}
-                              name="lastName"
-                              autoComplete="family-name"
+                              autoFocus
                             />
                           </Grid>
                         </>
                       )}
-
+                      <Grid item xs={12}>
+                        <TextField
+                          autoComplete="given-name"
+                          name="position"
+                          // ref={firstNameRef}
+                          readOnly={disabled}
+                          required={required}
+                          onChange={onChange}
+                          value={position}
+                          style={{ color: "000" }}
+                          fullWidth
+                          InputLabelProps={{
+                            style: { color: "#000" },
+                          }}
+                          id="position"
+                          label={"position"}
+                          autoFocus
+                        />
+                      </Grid>
                       <Grid item xs={12}>
                         <TextField
                           required={required}
@@ -250,6 +292,24 @@ function Form(props) {
                           }}
                           label={"phone"}
                           id="phone"
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          name="location"
+                          // ref={firstNameRef}
+                          readOnly={disabled}
+                          required={required}
+                          onChange={onChange}
+                          value={location}
+                          style={{ color: "000" }}
+                          fullWidth
+                          InputLabelProps={{
+                            style: { color: "#000" },
+                          }}
+                          id="location"
+                          label={"location"}
+                          autoFocus
                         />
                       </Grid>
                       {props.children}

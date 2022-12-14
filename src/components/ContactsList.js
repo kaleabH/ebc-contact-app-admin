@@ -41,6 +41,8 @@ function ContactsList({ refresh, onRefresh }) {
   };
 
   useEffect(() => {
+    document.getElementsByTagName("body")[0].style.background =
+      "linear-gradient(180deg, #024BC0 15.74%, rgba(15, 93, 218, 0.41) 62.1%, rgba(3, 100, 255, 0.23) 99.07%)";
     console.log("the division selected is", division);
 
     if (selectedCategory !== "") {
@@ -105,7 +107,7 @@ function ContactsList({ refresh, onRefresh }) {
   console.log("loading value", loading);
   return (
     <>
-      <AddContacts onRefresh={onRefresh} />
+      {!loading && <AddContacts onRefresh={onRefresh} />}
       <CategoryPortal
         selectedCategory={selectedCategory}
         categories={categories}
@@ -119,10 +121,13 @@ function ContactsList({ refresh, onRefresh }) {
       ) : (
         loaded && (
           <div
-            style={{ maxWidth: "960px", paddingRight: "0px" }}
+            style={{
+              maxWidth: "960px",
+              paddingRight: "0px",
+            }}
             className="container mt-4"
           >
-            <div className="row">
+            <div className="row mt-5">
               {filteredDataSource.map((contact) => (
                 <Contact
                   key={contact.id}

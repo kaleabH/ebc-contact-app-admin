@@ -52,7 +52,8 @@ function SearchBox({
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => {
+            onClick={(e) => {
+              document.getElementById("division").innerText = "All";
               handleSettingDivision("all");
             }}
           >
@@ -61,7 +62,8 @@ function SearchBox({
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => {
+            onClick={(e) => {
+              document.getElementById("division").innerText = "Internal";
               handleSettingDivision("internal");
             }}
           >
@@ -70,7 +72,8 @@ function SearchBox({
           <button
             type="button"
             className="btn btn-success"
-            onClick={() => {
+            onClick={(e) => {
+              document.getElementById("division").innerText = "External";
               handleSettingDivision("external");
             }}
           >
