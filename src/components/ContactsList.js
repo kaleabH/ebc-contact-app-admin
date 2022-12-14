@@ -33,6 +33,7 @@ function ContactsList({ refresh, onRefresh }) {
 
   const handleContactClick = (contact) => {
     setClickedContact(contact);
+    setOpenDetail(true);
   };
   const handleSettingDivision = (division) => {
     setLoading(true);

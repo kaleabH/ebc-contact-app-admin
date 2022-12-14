@@ -15,7 +15,7 @@ const initialContact = {
   lastName: "",
   email: "",
   phone: "",
-  category: "",
+  category: "Entertainment",
   division: "internal",
   position: "",
   location: "",
