@@ -1,6 +1,5 @@
 import "./App.css";
 import ContactList from "./components/ContactsList";
-import OffsetBox from "./components/OffsetBox";
 import CheckInternet from "./components/CheckInternet";
 import React, { useEffect, useState } from "react";
 import Loading from "./components/Loading";
@@ -34,7 +33,7 @@ function App() {
     <Loading />
   ) : online === "online" ? (
     <>
-      <OffsetBox />
+      {/* <OffsetBox /> */}
       {/* <CryptoGraph /> */}
       <AddCategory onRefresh={setRefreshList} />
       <ContactList refresh={refreshList} onRefresh={setRefreshList} />
