@@ -126,9 +126,9 @@ function ContactsList({ refresh, onRefresh }) {
               maxWidth: "960px",
               paddingRight: "0px",
             }}
-            className="container mt-4"
+            className="container"
           >
-            <div className="row mt-5">
+            <div className="row ">
               {filteredDataSource.map((contact) => (
                 <Contact
                   key={contact.id}
