@@ -10,15 +10,6 @@ function App() {
   const [online, setOnline] = useState("loading");
 
   useEffect(() => {
-    // window.addEventListener("online", () => {
-    //   setOnline(true);
-    //   console.log("online");
-    // });
-
-    // window.addEventListener("offline", () => {
-    //   setOnline(false);
-    //   console.log("offline");
-    // });
     document.getElementsByTagName("body")[0].style.background =
       "linear-gradient(180deg, #024BC0 15.74%, rgba(15, 93, 218, 0.41) 62.1%, rgba(3, 100, 255, 0.23) 99.07%)";
     if (window.navigator.onLine) {

@@ -42,7 +42,7 @@ function FormConfirm(props) {
             alignItems: "center",
           }}
         >
-          <h4 className="text-center">{children}</h4>
+          <h6 className="text-center">{children}</h6>
         </div>
         <div
           style={{
@@ -58,6 +58,7 @@ function FormConfirm(props) {
             onClick={() => {
               //   handleVisiblity(true);
               handleApi();
+              setVisiblity(false);
             }}
             className="btn btn-primary"
           >
