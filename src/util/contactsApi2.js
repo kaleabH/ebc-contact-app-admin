@@ -42,6 +42,7 @@ export const getCategories = async (division) => {
     console.log(err);
   }
 };
+
 export const getContacts = async () => {
   try {
     const request = await api.get("/", config);
@@ -236,5 +237,49 @@ export const addCategory = async (category, division) => {
     return true;
   } catch (err) {
     return console.log("add contact error", err);
+  }
+};
+export const deleteCategory = async (category) => {
+  try {
+    console.log("delete category");
+    const request = await api.get("/", config);
+
+    const data = await request.data.record;
+    let division = "";
+
+    for (const prop in data.internal) {
+      if (prop === category) {
+        console.log("found inside the internal");
+        division = "internal";
+      }
+    }
+    for (const prop in data.external) {
+      if (prop === category) {
+        console.log("found inside the external");
+        division = "external";
+      }
+    }
+
+    console.log("the category is side the delete", category);
+    console.log("the division is side the delete", division);
+
+    let newDivision = {};
+
+    for (const prop in data[division]) {
+      if (prop !== category) {
+        newDivision = { ...newDivision, [prop]: data[division][prop] };
+        /* the other way to do it */
+        // newDivision[prop] = data[division][prop];
+      }
+    }
+
+    const newContacts = { ...data, [division]: newDivision };
+    console.warn("the new contacts list after category deletion", newContacts);
+    console.warn("the new division ", newDivision);
+    await api.put("/", newContacts, config);
+    window.location.reload();
+    return true;
+  } catch (err) {
+    return console.log("category error", err);
   }
 };

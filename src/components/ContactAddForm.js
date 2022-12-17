@@ -15,11 +15,11 @@ const initialContact = {
   lastName: "",
   email: "",
   phone: "",
-  category: "Entertainment",
-  division: "internal",
+  category: "",
+  division: "",
   position: "",
   location: "",
-  image: null,
+  image: "image",
 };
 
 const reducer = (contact, action) => {
@@ -31,17 +31,33 @@ function ContactAddForm({ onClose, onRefresh, loaded, setLoaded, setAddForm }) {
   const [loading, setLoading] = useState(false);
   const [contact, dispatch] = useReducer(reducer, initialContact);
   const [visible, setVisiblity] = useConfirmState();
+  const [unfilledField, setUnfilledField] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     loading && setLoaded(false);
+    setUnfilledField(false);
+    setErrorMessage("");
   }, [setLoaded, loading]);
   const handleChange = (e) => {
     dispatch(e.target);
   };
   const handleClick = (e) => {
+    setErrorMessage("");
     e.preventDefault();
-    setVisiblity(true);
-
+    let fieldFlag = false;
+    for (let prop in contact) {
+      if (contact[prop] === "") {
+        fieldFlag = true;
+        setErrorMessage((prevError) => `${prop} is required, ` + prevError);
+      }
+    }
+    /** what out when using useState inside a loop setting the value iteratively */
+    setUnfilledField(fieldFlag);
+    if (fieldFlag === false) {
+      setVisiblity(true);
+      setErrorMessage("");
+    }
     // don't use window.cofirm(), window.alert(), window.prompt()
     // or any window popup methods while using electron
     // it causes some components to freeze and glitch i.e:-
@@ -76,12 +92,15 @@ function ContactAddForm({ onClose, onRefresh, loaded, setLoaded, setAddForm }) {
             )
           }
         >
-          <Button
-            sm={12}
-            onClick={handleClick}
-            title={"Add Contact"}
-            style={{ backgroundColor: "blue" }}
-          />
+          <>
+            {unfilledField && <h5 className="text-danger">{errorMessage}</h5>}
+            <Button
+              sm={12}
+              onClick={handleClick}
+              title={"Add Contact"}
+              style={{ backgroundColor: "blue" }}
+            />
+          </>
         </Form>
       )}
     </>,

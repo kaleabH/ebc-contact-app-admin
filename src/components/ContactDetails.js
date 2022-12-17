@@ -24,9 +24,13 @@ function ContactDetails(props) {
   const [newContact, dispatch] = useReducer(reducer, contact);
 
   const [visible, setVisiblity] = useConfirmState();
+  const [unfilledField, setUnfilledField] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     loading && setLoaded(false);
+    setUnfilledField(false);
+    setErrorMessage("");
   }, [setLoaded, loading]);
 
   const deleteHandler = async (e) => {
@@ -54,8 +58,22 @@ function ContactDetails(props) {
   };
 
   const handleClick = (e) => {
+    setErrorMessage("");
     e.preventDefault();
-    setVisiblity(true);
+    let fieldFlag = false;
+    for (let prop in newContact) {
+      if (newContact[prop] === "") {
+        fieldFlag = true;
+        console.log(prop, newContact[prop]);
+        setErrorMessage((prevError) => `${prop} is required, ` + prevError);
+      }
+    }
+    /** what out when using useState inside a loop setting the value iteratively */
+    setUnfilledField(fieldFlag);
+    if (fieldFlag === false) {
+      setVisiblity(true);
+      setErrorMessage("");
+    }
     // don't use window.cofirm(), window.alert(), window.prompt()
     // or any window popup methods while using electron
     // it causes some components to freeze and glitch i.e:-
@@ -97,12 +115,16 @@ function ContactDetails(props) {
               )
             }
           >
-            <Button
-              sm={12}
-              onClick={handleClick}
-              title={"Save"}
-              style={{ backgroundColor: "blue" }}
-            />
+            {" "}
+            <>
+              {unfilledField && <h5 className="text-danger">{errorMessage}</h5>}
+              <Button
+                sm={12}
+                onClick={handleClick}
+                title={"Save"}
+                style={{ backgroundColor: "blue" }}
+              />
+            </>
           </Form>
         )
       ) : (

@@ -8,11 +8,13 @@ function AddCategory({ onRefresh }) {
   const [division, setDivision] = useState("");
   const [apiMutated, setApiMutated] = useState(true);
   const [category, setCategory] = useState("");
+  const [unfilled, setUnfilled] = useState(false);
   return ReactDOM.createPortal(
     <div>
       <button
         onClick={() => {
           setShowForm((prevShowForm) => !prevShowForm);
+          setUnfilled(false);
         }}
         type="button"
         className="btn btn-labeled btn-success"
@@ -89,16 +91,26 @@ function AddCategory({ onRefresh }) {
                 }}
               />
             </div>
+            {unfilled && (
+              <h6 className="text-danger">
+                category and division name required
+              </h6>
+            )}
             <button
-              onClick={async () => {
-                let apiResponse;
-                setApiMutated(false);
-                apiResponse = await addCategory(category, division);
-                setApiMutated(apiResponse);
-                onRefresh(true);
-                setShowForm(false);
+              onClick={async (e) => {
+                e.preventDefault();
+                if (category === "" || division === "") {
+                  setUnfilled(true);
+                  return;
+                } else {
+                  let apiResponse;
+                  setApiMutated(false);
+                  apiResponse = await addCategory(category, division);
+                  setApiMutated(apiResponse);
+                  onRefresh(true);
+                  setShowForm(false);
+                }
               }}
-              type="submit"
               className="btn btn-primary mb-2"
             >
               Add
