@@ -35,6 +35,36 @@ function CategoryList({
 
   return (
     <div>
+      {showDelete && (
+        <>
+          {" "}
+          <button
+            onClick={() => {
+              if (selectedCat !== "") setShowFormConfirm(true);
+            }}
+            className="btn btn-danger"
+          >
+            delete
+          </button>
+          {showFormConfirm && (
+            <ConfirmFormPortal>
+              <FormConfirm
+                handleApi={() => {
+                  handleCategoryDelete();
+                }}
+                setVisiblity={setShowFormConfirm}
+              >
+                {" "}
+                <span className="text-danger">
+                  {" "}
+                  deleting category will also delete the contacts in that
+                  category.do you still want to delete{" "}
+                </span>
+              </FormConfirm>
+            </ConfirmFormPortal>
+          )}
+        </>
+      )}
       <div
         style={{
           display: "flex",
@@ -64,36 +94,8 @@ function CategoryList({
           {division}
         </button>
       </div>
-      {showDelete ? (
-        <>
-          {" "}
-          <button
-            onClick={() => {
-              if (selectedCat !== "") setShowFormConfirm(true);
-            }}
-            className="btn btn-danger"
-          >
-            delete
-          </button>
-          {showFormConfirm && (
-            <ConfirmFormPortal>
-              <FormConfirm
-                handleApi={() => {
-                  handleCategoryDelete();
-                }}
-                setVisiblity={setShowFormConfirm}
-              >
-                {" "}
-                <span className="text-danger">
-                  {" "}
-                  deleting category will also delete the contacts in that
-                  category.do you still want to delete{" "}
-                </span>
-              </FormConfirm>
-            </ConfirmFormPortal>
-          )}
-        </>
-      ) : loading ? (
+
+      {loading ? (
         <Loading />
       ) : (
         loaded &&

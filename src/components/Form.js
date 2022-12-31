@@ -190,6 +190,7 @@ function Form(props) {
                                   value={category}
                                   onChange={onChange}
                                 >
+                                  <option selected={true}>Categories</option>
                                   {categories.map((cat) => (
                                     <option key={cat} value={cat}>
                                       {cat}

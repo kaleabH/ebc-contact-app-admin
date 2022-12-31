@@ -1,19 +1,36 @@
 const axios = require("axios");
 const api = axios.create({
-  baseURL: "https://api.jsonbin.io/v3/b/6389d05b003d6444ce60c326",
-});
-const key = "$2b$10$oyACctGkJDCjwuEKOcpRPO4dwjCqEFoYOznrF5ngbtxVzGLyyur2S";
-const config = {
-  // params: { apikey: key },
+  /*for the jsonbin api*/
+  // baseURL: "https://api.jsonbin.io/v3/b/6389d05b003d6444ce60c326",
 
-  headers: { "X-Master-Key": key },
+  baseURL:
+    "https://api.jsonstorage.net/v1/json/b8b28667-4983-42a1-b60b-4aad38f39f99/07ddc6f8-5d5b-4e0b-91d0-9056035ed2f3",
+});
+/* for the jsonbin api*/
+// const key = "$2b$10$oyACctGkJDCjwuEKOcpRPO4dwjCqEFoYOznrF5ngbtxVzGLyyur2S";
+
+const key = "0fd11bd1-3ecd-42c3-a3f9-a0a2b73f2b11";
+const config = {
+  /*for the jsonbin api*/
+  // headers: { "X-Master-Key": key },
+
+  /*for the jsonStorage api*/
+  params: { apikey: key },
+  headers: { authorization: key },
 };
 export const getCategories = async (division) => {
   // if nothing is passed to this method it will return all the categories
   try {
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
     const internal = data.internal;
     const external = data.external;
     const categories = [];
@@ -45,9 +62,16 @@ export const getCategories = async (division) => {
 
 export const getContacts = async () => {
   try {
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+    console.log("the request is  ", request);
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
     const internal = data.internal;
     const external = data.external;
     const contacts = [];
@@ -68,9 +92,16 @@ export const getContactsByCategory = async (category) => {
   // let division = "";
   console.log("the category inside the getContactsByCategory", category);
   try {
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
+
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
     console.log("the api response", request.data);
-    const data = await request.data.record;
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
 
     let contacts = [];
 
@@ -89,9 +120,16 @@ export const getContactsByCategory = async (category) => {
 
 export const getInternalContacts = async () => {
   try {
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
     const internal = data.internal;
     const contacts = [];
     for (const prop in internal) {
@@ -106,9 +144,16 @@ export const getInternalContacts = async () => {
 
 export const getExternalContacts = async () => {
   try {
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
     const external = data.external;
     const contacts = [];
 
@@ -143,9 +188,16 @@ export const updateContacts = async (contact) => {
 export const deleteContact = async (id) => {
   try {
     console.log("deleteContact");
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
 
     const contacts = await getContacts();
     let division = "";
@@ -177,9 +229,16 @@ export const deleteContact = async (id) => {
 export const addContact = async (contact) => {
   try {
     console.log("the contact to be added function", contact);
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
     // const contacts = await getContacts();
 
     const division = contact.division;
@@ -210,9 +269,16 @@ export const addContact = async (contact) => {
 export const addCategory = async (category, division) => {
   try {
     console.log("add category");
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
     // const contacts = await getContacts();
 
     //  const newContacts = {...data};
@@ -242,9 +308,16 @@ export const addCategory = async (category, division) => {
 export const deleteCategory = async (category) => {
   try {
     console.log("delete category");
-    const request = await api.get("/", config);
+    // const request = await api.get("/", config);
 
-    const data = await request.data.record;
+    /*for the jsonStorage api*/
+
+    const request = await api.get("/");
+
+    // const data = await request.data.record;
+
+    /*for the jsonStorage api*/
+    const data = await request.data;
     let division = "";
 
     for (const prop in data.internal) {
