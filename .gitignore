@@ -13,6 +13,9 @@
 
 # distribution
 /dist
+#Api data
+/src/util/ApiData.js
+/src/util/contactsApi.js
 # api json structure test
 example.json
 # misc
